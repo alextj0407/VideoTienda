@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block titulo %}Lista{% endblock %}
+{% block contenido %}
+<h3 align="center">Lista de Videos</h3>
+    {% if lista %}
+    <table class="responsive-table highlight">
+        <thead>
+            <tr>
+                <th>titulo</th>
+                <th>idioma</th>
+                <th>duración</th>
+                <th>formato</th>
+                <th>valor</th>
+                <th>director</th>
+                <th>nacionalidad</th>
+                <th>alquileres</th>
+            </tr>
+        </thead>
+            {% for i in lista %}
+            <tr>
+                <td>{{i.titulo}}</td>
+                <td>{{i.idioma}}</td>
+                <td>{{i.duracion}}</td>
+                
+                <td>{{i.formato}}</td>
+                <td>${{i.valor}}</td>
+                <td> {% if i.director %}
+                        {{i.director}}
+                    {% else %}
+                        NO REGISTRADO
+                    {% endif %}
+                    </td>
+                <td> {% if i.nacionalidad %}
+                        {{i.nacionalidad}}
+                    {% else %}
+                        NO REGISTRADO
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if i.veces %} 
+                    {{i.veces}}
+                    {% else %}
+                    0
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+    <span>...Lista vacía</span>
+    {% endif %}
+<br>
+
+<div style="margin: 0 0 100px;">
+    <h3 align="center">Videos mas alquilados</h3>
+    {% if lista3 %}
+    <table class="responsive-table highlight">
+            <thead>
+                <tr>
+                    <th>Director</th>
+                    <th>Nacionalidad</th>
+                    
+                    <th>video</th>
+                    <th>idioma</th>
+                    <th>duración</th>
+                    <th>formato</th>
+                    <th>valor</th>
+                    <th>alquileres</th>
+
+                </tr>
+            </thead>
+                {% for i in lista3 %}
+                <tr>
+                    <td>{{i.director}}</td>
+                    <td>{{i.nacionalidad}}</td>
+                    
+                    <td>{{i.titulo}}</td>
+                    <td>{{i.idioma}}</td>
+                    <td>{{i.duracion}}</td>
+                    <td>{{i.format}}</td>
+                    <td>{{i.valor}}</td>
+                    <td>{{i.veces}}</td>
+                </tr>
+                {% endfor %}
+    </table>
+    {% else %}
+    <span>...No hay resultados</span>
+    {% endif %}
+</div>
+
+<div style="margin: 0 0 100px;">
+    <h3 align="center">Cliente mas frecuente del video mas alquilado</h3>
+    {% if video_persona %}
+    <table class="responsive-table highlight">
+            <thead>
+                <tr>
+                    <th>video</th>
+                    <th>idioma</th>
+                    <th>duración</th>
+                    <th>Cliente que mas alquilo</th>
+                    <th>Alquilo</th>
+                </tr>
+            </thead>
+                {% for i in video_persona %}
+                <tr>
+                    <td>{{i.titulo}}</td>
+                    <td>{{i.idioma}}</td>
+                    <td>{{i.duracion}}</td>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.veces}} veces</td>
+                </tr>
+                {% endfor %}
+    </table>
+    {% else %}
+    <span>...No hay resultados</span>
+    {% endif %}
+</div>
+{% endblock %}

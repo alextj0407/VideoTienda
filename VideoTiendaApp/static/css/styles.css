@@ -1,0 +1,15 @@
+/* ESTILOS DE NAVEGADOR PRINCIPAL */
+.navegador_principal{
+    background: rgba(7, 7, 46, 0.897);
+}
+
+
+
+/* ESTILOS DE NAVEGADOR SECCUNDARIO */
+.navegador_secundario{
+    background:rgba(7, 7, 46, 0.897);
+}
+
+.menu_principal{
+    font-size: 20px;
+}

@@ -1,0 +1,96 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'material_icons.css' %}">
+    <title>{% block titulo %}{% endblock %}</title>
+</head>
+<body>
+    
+    <div class="navbar-fixed">
+        <nav class=" navegador_principal">
+            <div class="container">
+                <div class="">
+                    <div class="nav-wrapper">
+                        <a href="" class="brand-logo">
+                            <img src="{% static 'img/imagen1.png'%}" style="width: 105px; margin: 15px auto;">
+                        </a>
+                        <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul class=" right hide-on-med-and-down">
+                            <li><a href="{% url 'cliente_lista' %}" class="menu_principal">Clientes</a></li>
+                            <li><a href="{% url 'listado_lista' %}" class="menu_principal">Listados</a></li>
+                            <li><a href="{% url 'video_lista' %}" class="menu_principal">Videos</a></li>
+                            <li><a href="{% url 'alquiler_lista' %}" class="menu_principal">Alquileres</a></li>
+                            <!-- <li><a href="{% url 'mas_premiada' %}">Cliente mas premiado</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <nav class="navegador_secundario hide-on-med-and-down">
+            <div class="container">
+                <div class="nav-wrapper">
+                    
+                    <ul class="hide-on-med-and-down">
+                        <li><a href="{% url 'actor_lista' %}">Actores</a></li>
+                        <li><a href="{% url 'genero_lista' %}">Generos</a></li>
+                        <li><a href="{% url 'director_lista' %}">Directores</a></li>
+                        <li><a href="{% url 'formato_lista' %}">Formatos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
+    
+
+    <ul class="sidenav" id="mobile-demo" style="width: 200px;" >
+        <div class="background">
+            <a href="" class="brand-logo"><img src="{% static 'img/imagen1.png'%}" style="width: 200px; background:rgba(7, 7, 46, 0.897) "></a>
+        </div>
+        <li><a href="{% url 'cliente_lista' %}">Clientes</a></li>
+        <li><a href="{% url 'listado_lista' %}">Listados</a></li>
+        <li><a href="{% url 'video_lista' %}">Videos</a></li>
+        <li><a href="{% url 'alquiler_lista' %}">Alquileres</a></li>
+        <!-- <li><a href="{% url 'mas_premiada' %}">Cliente mas premiado</a></li> -->
+        <hr style="color:rgba(199, 188, 188, 0.719)">
+        
+        <li><a href="{% url 'actor_lista' %}">Actores</a></li>
+        <li><a href="{% url 'genero_lista' %}">Generos</a></li>
+        <li><a href="{% url 'director_lista' %}">Directores</a></li>
+        <li><a href="{% url 'formato_lista' %}">Formatos</a></li>
+        
+    </ul>
+
+
+
+
+
+    <div class="container">
+        {% block contenido %}{% endblock %}
+    </div>
+    <script src="{% static 'jquery/jquery.js' %}" ></script>
+    <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+            $('.modal').modal();
+            $('.datepicker').datepicker({
+                format:'dd/mm/yyyy'
+            });
+        });
+    </script>
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

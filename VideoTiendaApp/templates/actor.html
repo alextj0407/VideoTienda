@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block titulo %}Lista{% endblock %}
+{% block contenido %}
+
+<h2 align="center">Actores</h2>
+
+<table class="responsive-table">
+    <thead>
+        <tr>
+            <th>Actores</th>
+        </tr>
+    </thead>
+        {% for i in lista %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.nombre}}</td>
+            <td> <a id="del" href="{% url 'eliminar_actor' pk=i.id %}">Eliminar</a> </td>
+            <!-- <td> <button class="del" value="{{i.id}}">Eliminar</button> </td> -->
+        </tr>
+        {% endfor %}
+</table>
+
+<form action="" method="POST" id="agregar">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+</form>
+
+<div class="modal" id="modaldel">
+    <div class="modal-content">
+        <h4>Eliminado correctamente</h4>
+    </div>
+    <div class="modal-footer">
+        <button class="listo" >ok</button>
+        <a href="#!" class="modal-close">cerrar</a>
+    </div>
+</div>
+<div class="modal" id="modaldelerr">
+    <div class="modal-content">
+        <h4>Esta url no Existe</h4>
+    </div>
+    <div class="modal-footer">
+        <button class="listo" >ok</button>
+        <a href="#!" class="modal-close">cerrar</a>
+    </div>
+</div>
+
+<div class="modal" id="modalconfirm">
+    <div class="modal-content">
+        <h4>Decea Eliminar</h4>
+    </div>
+    <div class="modal-footer">
+        <button id="si_confirmo" >ok</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        $('.listo').click(function(){
+            location.href='/';
+        })
+
+        var id_del = 0;
+
+        $('.del').click(function(){
+            var id_del = $(this).val();
+            var confirma = confirm('Quiere eliminar a '+valor);
+            if(confirma){
+               
+            }
+        })
+
+        
+        function btn_confirm(){
+            $.ajax({
+                    'data':{'pk':id_del},
+                    'url':'/eliminar_actor/',
+                    'type':'get',
+                    success:function(){
+                        alert('Eliminado de forma exitosa');
+                        location.href='/'
+                    }
+                })
+        }
+
+        function abrir_modal(){
+            $('#modaldel').modal('open');
+        }
+
+        $('#agregar').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                type:'POST',
+                data:{'data':$('#agregar').val()},
+                url:'/',
+                success:function(){
+                    alert('Registro echo')
+                }
+            })
+        })
+    </script>
+
+{% if 'ok' in request.GET %}
+<script>
+  $(document).ready(function(){
+        $('#modaldel').modal('open');
+    })
+
+</script>
+{% endif %}
+{% if 'err' in request.GET %}
+<script>
+  $(document).ready(function(){
+        $('#modaldelerr').modal('open');
+    })
+</script>
+{% endif %}
+    
+{% endblock %}

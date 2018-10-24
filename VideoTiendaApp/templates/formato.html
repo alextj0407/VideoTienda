@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block titulo %}Lista{% endblock %}
+{% block contenido %}
+<h2 align="center">Formatos</h2>
+<table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Formatos</th>
+            </tr>
+        </thead>
+            {% for i in lista %}
+            <tr>
+                <td>{{i}}</td>
+            </tr>
+            {% endfor %}
+    </table>
+{% endblock %}

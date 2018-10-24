@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}consulta{% endblock %}
+{% block contenido %}
+
+    <h4>Directores mas exitosos en el tiempo</h4>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">
+            <span>Fecha inicial</span>
+            <input type="text" class="datepicker" name="fecha1" required="required" placeholder="Esta fecha debe ser inferior a la fecha final">
+        </label>
+        <label>
+            <span>Fecha final</span>
+            <input type="text" class="datepicker" name="fecha2" required="required" placeholder="Esta fecha debe ser superior a la fecha inicial">
+        </label>
+        <input type="submit">
+    </form>
+
+    {% if consulta %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Nacionalidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in consulta %}
+                <tr>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.nacionalidad}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <h4>No hay Resultados</h4>
+    {% endif %}
+
+{% endblock %}
